@@ -1,109 +1,76 @@
 # StoreRDN
 
-Este proyecto es una demostración de operaciones CRUD utilizando Java y MySQL. El propósito es ilustrar cómo conectar una aplicación Java a una base de datos MySQL y realizar operaciones básicas de manipulación de datos.
+## Descripción
+
+Este proyecto es una aplicación que utiliza JDBC para conectarse a una base de datos MySQL. La aplicación realiza operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en una tabla llamada `productos` en la base de datos `storeproject`.
+
+## Estructura del Proyecto
+
+- **src/**: Contiene el código fuente de la aplicación.
+  - `Main.java`: Clase principal que realiza la conexión con la base de datos y ejecuta operaciones CRUD.
+- **lib/**: Contiene el conector JDBC para MySQL.
+  - `mysql-connector-j-9.0.0.jar`: Archivo JAR del conector JDBC.
+- **README.md**: Este archivo con información sobre el proyecto.
 
 ## Requisitos
 
-- JDK 11 o superior
-- MySQL Server
-- MySQL Connector/J
+- Java Development Kit (JDK) 11 o superior.
+- MySQL 8.0 o superior.
+- MySQL Connector/J.
 
-## Instalación
+## Configuración
 
-### 1. Configurar MySQL
+1. **Instalar el conector JDBC**:
+   - Descarga el archivo `mysql-connector-j-9.0.0.jar` desde [MySQL](https://dev.mysql.com/downloads/connector/j/).
 
-1. **Descargar e instalar MySQL Server**: Asegúrate de tener MySQL Server en funcionamiento.
-2. **Crear una base de datos**:
-   - Abre MySQL Workbench.
-   - Conéctate al servidor MySQL.
-   - Ejecuta el siguiente comando para crear la base de datos:
+2. **Configurar la base de datos**:
+   - Asegúrate de que MySQL esté instalado y en ejecución.
+   - Crea una base de datos llamada `storeproject`.
+   - En MySQL Workbench, ejecuta el siguiente comando para crear la tabla `productos`:
      ```sql
-     CREATE DATABASE storeproject;
+     CREATE TABLE IF NOT EXISTS productos (
+       id INT PRIMARY KEY AUTO_INCREMENT,
+       nombre VARCHAR(50)
+     );
      ```
 
-### 2. Configurar el Proyecto
+3. **Compilación y Ejecución**:
 
-1. **Descargar el conector MySQL JDBC**:
-   - Descarga el archivo ZIP del conector desde [MySQL Connector/J](https://dev.mysql.com/downloads/connector/j/).
-   - Descomprime el archivo ZIP.
-   - Encuentra el archivo JAR en la carpeta descomprimida, por ejemplo, `mysql-connector-j-9.0.0.jar`.
+   - **Compilar**:
+     ```bash
+     javac -cp ".;lib/mysql-connector-j-9.0.0.jar" src/Main.java
+     ```
 
-2. **Configurar el Proyecto en VS Code**:
-   - Crea una carpeta para tu proyecto, por ejemplo, `StoreRDN`.
-   - Dentro de la carpeta `StoreRDN`, crea una subcarpeta llamada `lib` y coloca el archivo JAR del conector MySQL en esta carpeta.
-   - Crea una subcarpeta llamada `src` para el código fuente.
+   - **Ejecutar**:
+     ```bash
+     java -cp ".;lib/mysql-connector-j-9.0.0.jar;src" Main
+     ```
 
-### 3. Código
+## Funcionalidades
 
-#### `Main.java`
-
-El archivo `Main.java` realiza las siguientes operaciones:
-
-- **Conexión a la base de datos**: Usa JDBC para conectarse a la base de datos MySQL.
+- **Conexión a la base de datos**: Conecta con la base de datos MySQL `storeproject`.
 - **Operaciones CRUD**:
-  - **Crear**: Crea una tabla `productos` si no existe.
-  - **Leer**: Consulta y muestra los registros en la tabla `productos`.
-  - **Actualizar**: Actualiza un registro en la tabla `productos`.
-  - **Eliminar**: Elimina un registro de la tabla `productos`.
+  - **Crear**: Inserta un nuevo producto en la base de datos.
+  - **Leer**: Consulta y muestra los productos existentes en la base de datos.
+  - **Actualizar**: Actualiza el nombre de un producto específico.
+  - **Eliminar**: Elimina un producto de la base de datos.
 
-```java
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+## Documentación de Código
 
-public class Main {
-    public static void main(String[] args) {
-        Connection conn = null;
-        try {
-            // Cargar el driver de JDBC
-            Class.forName("com.mysql.cj.jdbc.Driver");
+- **Nombramiento de Variables**: Utilizar nombres descriptivos y en minúsculas con guiones bajos (ej. `product_id`).
+- **Nombramiento de Métodos**: Utilizar camelCase (ej. `createProduct`).
+- **Nombramiento de Clases**: Utilizar PascalCase (ej. `Main`).
+- **Nombramiento de Paquetes**: Utilizar minúsculas y separadas por puntos (ej. `com.example.store`).
 
-            // Conectar a la base de datos
-            String url = "jdbc:mysql://localhost:3306/storeproject";
-            conn = DriverManager.getConnection(url, "root", "Jean1210.");
+## Uso
 
-            // Crear una consulta
-            Statement stmt = conn.createStatement();
-            
-            // Crear la tabla (si no existe)
-            String createTableSQL = "CREATE TABLE IF NOT EXISTS productos (id INT PRIMARY KEY, nombre VARCHAR(50))";
-            stmt.executeUpdate(createTableSQL);
+Después de compilar y ejecutar la aplicación, se mostrará en la consola un mensaje indicando que la conexión fue exitosa y que las operaciones CRUD se realizaron correctamente.
 
-            // Insertar un nuevo registro
-            String insertSQL = "INSERT INTO productos (id, nombre) VALUES (1, 'Producto A')";
-            stmt.executeUpdate(insertSQL);
+## Contribuciones
 
-            // Consultar registros
-            String selectSQL = "SELECT * FROM productos";
-            ResultSet rs = stmt.executeQuery(selectSQL);
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String nombre = rs.getString("nombre");
-                System.out.println("ID: " + id + ", Nombre: " + nombre);
-            }
+Si deseas contribuir a este proyecto, por favor realiza un fork del repositorio, realiza tus cambios y envía un pull request para revisión.
 
-            // Actualizar un registro
-            String updateSQL = "UPDATE productos SET nombre = 'Producto Actualizado' WHERE id = 1";
-            stmt.executeUpdate(updateSQL);
+## Licencia
 
-            // Eliminar un registro
-            String deleteSQL = "DELETE FROM productos WHERE id = 1";
-            stmt.executeUpdate(deleteSQL);
+Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
 
-            System.out.println("Operaciones CRUD realizadas exitosamente.");
-
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-}
