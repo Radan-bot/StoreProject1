@@ -1,61 +1,34 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class Main {
     public static void main(String[] args) {
-        Connection conn = null;
-        try {
-            // Cargar el driver de JDBC
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        // Crea una instancia de DatabaseHelper para interactuar con la base de datos
+        DatabaseHelper dbHelper = new DatabaseHelper();
 
-            // Conectar a la base de datos
-            String url = "jdbc:mysql://localhost:3306/storeproject";
-            conn = DriverManager.getConnection(url, "root", "Jean1210.");
+        // Limpia la tabla de productos antes de comenzar
+        dbHelper.clearProducts();
 
-            // Crear una consulta
-            Statement stmt = conn.createStatement();
-            
-            // Crear la tabla (si no existe)
-            String createTableSQL = "CREATE TABLE IF NOT EXISTS productos (id INT PRIMARY KEY, nombre VARCHAR(50))";
-            stmt.executeUpdate(createTableSQL);
+        // Inserta algunos productos en la base de datos
+        System.out.println("Insertando productos...");
+        dbHelper.createProduct(1, "Producto A");
+        dbHelper.createProduct(2, "Producto B");
 
-            // Insertar un nuevo registro
-            String insertSQL = "INSERT INTO productos (id, nombre) VALUES (1, 'Producto A')";
-            stmt.executeUpdate(insertSQL);
+        // Muestra los productos actuales almacenados en la base de datos
+        System.out.println("\nProductos en la base de datos:");
+        dbHelper.readProducts();
 
-            // Consultar registros
-            String selectSQL = "SELECT * FROM productos";
-            ResultSet rs = stmt.executeQuery(selectSQL);
-            while (rs.next()) {
-                int id = rs.getInt("id");
-                String nombre = rs.getString("nombre");
-                System.out.println("ID: " + id + ", Nombre: " + nombre);
-            }
+        // Actualiza un producto existente en la base de datos
+        System.out.println("\nActualizando el producto con ID 1...");
+        dbHelper.updateProduct(1, "Producto A Actualizado");
 
-            // Actualizar un registro
-            String updateSQL = "UPDATE productos SET nombre = 'Producto Actualizado' WHERE id = 1";
-            stmt.executeUpdate(updateSQL);
+        // Muestra los productos después de la actualización
+        System.out.println("\nProductos después de la actualización:");
+        dbHelper.readProducts();
 
-            // Eliminar un registro
-            String deleteSQL = "DELETE FROM productos WHERE id = 1";
-            stmt.executeUpdate(deleteSQL);
+        // Elimina un producto de la base de datos
+        System.out.println("\nEliminando el producto con ID 2...");
+        dbHelper.deleteProduct(2);
 
-            System.out.println("Operaciones CRUD realizadas exitosamente.");
-
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
+        // Muestra los productos después de la eliminación
+        System.out.println("\nProductos después de la eliminación:");
+        dbHelper.readProducts();
     }
 }
-
