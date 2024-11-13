@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.store</groupId>
+    <artifactId>storeRDN</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>storeRDN</name>
+    <description>Proyecto para gestión de tienda con Spring Boot</description>
+    <url>http://maven.apache.org</url>
+
+    <!-- Propiedades -->
+    <properties>
+        <java.version>22</java.version> <!-- Especifica la versión de Java que estás usando -->
+        <spring.boot.version>2.7.9</spring.boot.version> <!-- Especifica la versión de Spring Boot que deseas usar -->
+    </properties>
+
+    <dependencies>
+        <!-- Dependencia de Spring Boot Starter -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>2.7.9</version>
+        </dependency>
+
+        <!-- Dependencia para conectar con bases de datos (JDBC) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <version>2.7.9</version>
+        </dependency>
+
+        <!-- Dependencia para crear aplicaciones Web (REST APIs) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.7.9</version>
+        </dependency>
+
+        <!-- Dependencia de Spring Boot Starter para acceso a bases de datos con JPA (opcional si usas JPA) -->
+        <!-- <dependency> 
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>${spring.boot.version}</version>
+        </dependency> -->
+
+        <!-- Dependencia de MySQL (si estás usando MySQL como base de datos) -->
+        <!-- <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.28</version>
+        </dependency> -->
+        
+        <!-- Otras dependencias de tu elección pueden ir aquí -->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Plugin para Spring Boot que permite crear el JAR ejecutable -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.7.9</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
