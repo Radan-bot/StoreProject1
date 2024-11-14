@@ -1,0 +1,23 @@
+// Source code is decompiled from a .class file using FernFlower decompiler.
+public class Main {
+   public Main() {
+   }
+
+   public static void main(String[] var0) {
+      DatabaseHelper var1 = new DatabaseHelper();
+      var1.clearProducts();
+      System.out.println("Insertando productos...");
+      var1.createProduct(1, "Producto A");
+      var1.createProduct(2, "Producto B");
+      System.out.println("\nProductos en la base de datos:");
+      var1.readProducts();
+      System.out.println("\nActualizando el producto con ID 1...");
+      var1.updateProduct(1, "Producto A Actualizado");
+      System.out.println("\nProductos despu\u00e9s de la actualizaci\u00f3n:");
+      var1.readProducts();
+      System.out.println("\nEliminando el producto con ID 2...");
+      var1.deleteProduct(2);
+      System.out.println("\nProductos despu\u00e9s de la eliminaci\u00f3n:");
+      var1.readProducts();
+   }
+}
