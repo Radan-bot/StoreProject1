@@ -1,6 +1,3 @@
-package main.java.com.store;
-package Main.Java.com.store;
-package com.store;
 package com.store;
 
 public class Product {
@@ -24,4 +21,3 @@ public class Product {
         this.name = name;
     }
 }
-    

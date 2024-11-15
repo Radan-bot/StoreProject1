@@ -41,19 +41,19 @@
             <version>2.7.9</version>
         </dependency>
 
-        <!-- Dependencia de Spring Boot Starter para acceso a bases de datos con JPA (opcional si usas JPA) -->
-        <!-- <dependency> 
+        <!-- Dependencia de SLF4J para logging -->
+        <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>${spring.boot.version}</version>
-        </dependency> -->
+            <artifactId>spring-boot-starter-logging</artifactId>
+            <version>2.7.9</version>
+        </dependency>
 
-        <!-- Dependencia de MySQL (si estás usando MySQL como base de datos) -->
-        <!-- <dependency>
+        <!-- Dependencia de MySQL (descomentada para habilitar la conexión a la base de datos) -->
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.28</version>
-        </dependency> -->
+            <version>8.0.33</version> <!-- Puedes usar una versión más reciente -->
+        </dependency>
         
         <!-- Otras dependencias de tu elección pueden ir aquí -->
     </dependencies>
