@@ -1,4 +1,4 @@
-package com.store;
+package main.java.com.store.com.store;
 
 import java.sql.*;  
 import java.util.ArrayList;
