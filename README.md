@@ -1,74 +1,96 @@
-# StoreRDN
+# Proyecto Formativo - Store Project
 
-## Descripción
+## **Descripción General**
+Este proyecto es una aplicación web desarrollada en React que simula una tienda en línea básica. Incluye funcionalidades para mostrar productos en un catálogo con un diseño visual agradable, utilizando colores cálidos.
 
-**StoreRDN** es una aplicación que utiliza JDBC para conectarse a una base de datos MySQL y realiza operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en una tabla llamada `productos` dentro de la base de datos `storeproject`.
+## **Estructura del Proyecto**
+El proyecto está dividido en dos partes principales:
+1. **Frontend**: Aplicación web construida con React que muestra la interfaz de usuario.
+2. **Backend (pendiente de desarrollo)**: Se planea crear un backend utilizando Java con JDBC para la gestión de la base de datos.
 
-## Estructura del Proyecto
+## **Servicios Implementados**
+A continuación se detalla la documentación de los servicios creados para la aplicación:
 
-- **src/**: Contiene el código fuente de la aplicación.
-  - `Main.java`: Clase principal que realiza la conexión con la base de datos y ejecuta operaciones CRUD.
-- **lib/**: Contiene el conector JDBC para MySQL.
-  - `mysql-connector-j-9.0.0.jar`: Archivo JAR del conector JDBC.
-- **README.md**: Este archivo con información sobre el proyecto.
+### **Frontend - Componentes**
 
-## Requisitos
+#### 1. **Header Component**
+   - **Descripción**: Componente que muestra la barra de navegación en la parte superior de la página.
+   - **Propósito**: Permite la navegación básica dentro de la tienda.
+   - **Ubicación**: `src/Header.js`
+   - **Características**:
+     - Contiene enlaces a diferentes secciones de la tienda.
+     - Presenta el logo y un menú básico.
+   - **Tecnologías**: React, CSS.
 
-- Java Development Kit (JDK) 11 o superior.
-- MySQL 8.0 o superior.
-- MySQL Connector/J.
+#### 2. **Hero Component**
+   - **Descripción**: Componente que muestra una imagen destacada o promoción principal en la página de inicio.
+   - **Propósito**: Llamar la atención del usuario sobre ofertas especiales o productos destacados.
+   - **Ubicación**: `src/Hero.js`
+   - **Características**:
+     - Imágenes promocionales.
+     - Textos destacados para atraer al usuario.
+   - **Tecnologías**: React, CSS.
 
-## Configuración
+#### 3. **ProductList Component**
+   - **Descripción**: Componente que muestra una lista de productos disponibles en la tienda.
+   - **Propósito**: Mostrar al usuario un catálogo de productos de la tienda.
+   - **Ubicación**: `src/ProductList.js`
+   - **Características**:
+     - Genera una lista de productos utilizando el componente `ProductCard`.
+     - Los datos de los productos son simulados y se integrarán con el backend en el futuro.
+   - **Tecnologías**: React, CSS.
 
-1. **Instalar el conector JDBC**:
-   - Descarga el archivo `mysql-connector-j-9.0.0.jar` desde [MySQL](https://dev.mysql.com/downloads/connector/j/).
+#### 4. **ProductCard Component**
+   - **Descripción**: Componente que muestra la información básica de un producto individual.
+   - **Propósito**: Proporcionar una vista previa rápida de cada producto.
+   - **Ubicación**: `src/ProductCard.js`
+   - **Características**:
+     - Muestra la imagen del producto, el nombre, y el precio.
+     - Incluye botones para más detalles o agregar al carrito (en desarrollo).
+   - **Tecnologías**: React, CSS.
 
-2. **Configurar la base de datos**:
-   - Asegúrate de que MySQL esté instalado y en ejecución.
-   - Crea una base de datos llamada `storeproject`.
-   - En MySQL Workbench, ejecuta el siguiente comando para crear la tabla `productos`:
-     ```sql
-     CREATE TABLE IF NOT EXISTS productos (
-       id INT PRIMARY KEY AUTO_INCREMENT,
-       nombre VARCHAR(50) NOT NULL
-     );
-     ```
+#### 5. **Footer Component**
+   - **Descripción**: Componente que muestra la información del pie de página de la aplicación.
+   - **Propósito**: Proporcionar información adicional o enlaces relevantes, como contactos o términos de servicio.
+   - **Ubicación**: `src/Footer.js`
+   - **Características**:
+     - Incluye enlaces a redes sociales o información de contacto.
+   - **Tecnologías**: React, CSS.
 
-3. **Compilación y Ejecución**:
-   - **Compilar**:
-     ```bash
-     javac -cp ".;lib/mysql-connector-j-9.0.0.jar" src/Main.java
-     ```
+## **Servicios Planificados (Backend - JDBC con Java)**
+Aún está en desarrollo la parte del backend para la gestión de datos de productos en la base de datos. Se planea implementar los siguientes servicios utilizando Java con JDBC:
 
-   - **Ejecutar**:
-     ```bash
-     java -cp ".;lib/mysql-connector-j-9.0.0.jar;src" Main
-     ```
+### 1. **Servicio de Inserción de Productos**
+   - **Descripción**: Servicio para agregar nuevos productos a la base de datos.
+   - **EndPoint Planificado**: `/api/productos/agregar`
+   - **Datos de Entrada**: Nombre del producto, descripción, precio, categoría.
+   - **Respuesta**: Confirmación de la creación del producto.
 
-## Funcionalidades
+### 2. **Servicio de Consulta de Productos**
+   - **Descripción**: Servicio para recuperar la lista de productos de la base de datos.
+   - **EndPoint Planificado**: `/api/productos/lista`
+   - **Datos de Entrada**: Ninguno.
+   - **Respuesta**: Lista de productos con sus detalles.
 
-- **Conexión a la base de datos**: Establece conexión con la base de datos MySQL `storeproject`.
-- **Operaciones CRUD**:
-  - **Crear**: Inserta un nuevo producto en la base de datos.
-  - **Leer**: Consulta y muestra los productos existentes en la base de datos.
-  - **Actualizar**: Modifica el nombre de un producto específico.
-  - **Eliminar**: Borra un producto de la base de datos.
+### 3. **Servicio de Actualización de Productos**
+   - **Descripción**: Servicio para actualizar la información de un producto existente.
+   - **EndPoint Planificado**: `/api/productos/actualizar/{id}`
+   - **Datos de Entrada**: ID del producto, información a actualizar (nombre, precio, etc.).
+   - **Respuesta**: Confirmación de la actualización.
 
-## Documentación de Código
+### 4. **Servicio de Eliminación de Productos**
+   - **Descripción**: Servicio para eliminar un producto de la base de datos.
+   - **EndPoint Planificado**: `/api/productos/eliminar/{id}`
+   - **Datos de Entrada**: ID del producto.
+   - **Respuesta**: Confirmación de la eliminación del producto.
 
-- **Nombramiento de Variables**: Utilizar nombres descriptivos en minúsculas y con guiones bajos (ej. `product_id`).
-- **Nombramiento de Métodos**: Utilizar camelCase (ej. `createProduct`).
-- **Nombramiento de Clases**: Utilizar PascalCase (ej. `Main`).
-- **Nombramiento de Paquetes**: Utilizar minúsculas y separadas por puntos (ej. `com.example.store`).
+## **Cómo Ejecutar el Proyecto**
+### **Requisitos**
+- Node.js y npm instalados.
+- Java y JDBC configurados (para el backend, una vez implementado).
+- Navegador web.
 
-## Uso
-
-Después de compilar y ejecutar la aplicación, se mostrará en la consola un mensaje indicando que la conexión fue exitosa y que las operaciones CRUD se realizaron correctamente.
-
-## Contribuciones
-
-Si deseas contribuir a este proyecto, realiza un fork del repositorio, haz tus cambios y envía un pull request para revisión.
-
-## Licencia
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
+### **Instalación**
+1. Clona el repositorio desde GitHub:
+   ```bash
+   git clone <URL del repositorio>
